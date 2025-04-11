@@ -1,0 +1,18 @@
+# Don't track dependencies
+node_modules/
+
+# Don't track secret keys or credentials
+.env
+
+# Optional: VS Code settings
+.vscode/
+
+# Optional: Logs
+logs/
+*.log
+
+# Optional: OS/macOS junk
+.DS_Store
+
+# Optional: npm debug files
+npm-debug.log*
