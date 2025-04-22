@@ -1,5 +1,6 @@
 // src/Feed.jsx
 import { useState, useEffect } from 'react';
+import './Feed.css';
 
 function Feed() {
   const [posts, setPosts] = useState([]);
@@ -63,41 +64,40 @@ function Feed() {
   };
 
   return (
-    <div style={{ maxWidth: 600, margin: 'auto', padding: '2rem' }}>
-      <h2>Feed</h2>
-      {message && <p>{message}</p>}
-      {posts && posts.length > 0 ? (
-        posts.map((post) => (
-          <div key={post._id} style={{ border: '1px solid #ccc', padding: '1rem', margin: '1rem 0' }}>
-            <img src={post.imageUrl} alt="post" style={{ width: '100%' }} />
-            <p>{post.caption}</p>
-            <p>
-              <strong>
-                <a href={`/users/${post.user?._id}`}>{post.user?.name || 'Unknown'}</a>
-              </strong>
-              {" "} - {new Date(post.createdAt).toLocaleString()}
-            </p>
-            <p>Likes: {post.likes ? post.likes.length : 0}</p>
-            <button onClick={() => handleLike(post._id)}>Like/Unlike</button>
-            <div>
-              <h4>Comments</h4>
-              {post.comments && post.comments.length > 0 ? (
-                post.comments.map((comment) => (
-                  <div key={comment._id} style={{ borderTop: '1px solid #eee', paddingTop: '0.5rem' }}>
-                    <strong>{comment.user?.name || 'Anon'}:</strong> {comment.text}
-                  </div>
-                ))
-              ) : (
-                <p>No comments.</p>
-              )}
-              {/* Here you might add an input field to type and submit a new comment */}
-              {/* For example, you can integrate a small comment form per post */}
+    <div className="feed-container">
+      <h1 className="feed-title">Your Feed</h1>
+      {message && <p className="feed-message">{message}</p>}
+      <div className="posts-container">
+        {posts && posts.length > 0 ? (
+          posts.map((post) => (
+            <div key={post._id} className="post-card">
+              <img src={post.imageUrl} alt="Post" className="post-image" />
+              <p className="post-caption">{post.caption}</p>
+              <p className="post-meta">
+                <strong>{post.user?.name || 'Unknown'}</strong> - {new Date(post.createdAt).toLocaleString()}
+              </p>
+              <p>Likes: {post.likes ? post.likes.length : 0}</p>
+              <button onClick={() => handleLike(post._id)} className="post-button">Like</button>
+              <div>
+                <h4>Comments</h4>
+                {post.comments && post.comments.length > 0 ? (
+                  post.comments.map((comment) => (
+                    <div key={comment._id} style={{ borderTop: '1px solid #eee', paddingTop: '0.5rem' }}>
+                      <strong>{comment.user?.name || 'Anon'}:</strong> {comment.text}
+                    </div>
+                  ))
+                ) : (
+                  <p>No comments.</p>
+                )}
+                {/* Here you might add an input field to type and submit a new comment */}
+                {/* For example, you can integrate a small comment form per post */}
+              </div>
             </div>
-          </div>
-        ))
-      ) : (
-        <p>No posts yet.</p>
-      )}
+          ))
+        ) : (
+          <p>No posts yet.</p>
+        )}
+      </div>
     </div>
   );
 }

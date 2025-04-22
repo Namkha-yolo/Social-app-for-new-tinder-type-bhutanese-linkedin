@@ -1,6 +1,7 @@
 // src/UserProfile.jsx
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import './UserProfile.css'; // Import the CSS file for styling
 
 function UserProfile() {
   const { id } = useParams();
@@ -31,12 +32,24 @@ function UserProfile() {
   if (!profile) return <p>{message || 'Loading...'}</p>;
 
   return (
-    <div style={{ maxWidth: 600, margin: 'auto', padding: '2rem' }}>
-      <h2>{profile.name}'s Profile</h2>
-      <p>Email: {profile.email}</p>
-      <p>Phone: {profile.phone}</p>
-      {/* Display user's posts */}
-      {/* You could fetch posts separately by the userId */}
+    <div className="profile-container">
+      <div className="profile-header">
+        <h1 className="profile-title">User Profile</h1>
+      </div>
+      <div className="profile-content">
+        <img
+          src={profile.profilePicture || 'https://via.placeholder.com/150'}
+          alt="Profile"
+          className="profile-picture"
+        />
+        <h2 className="profile-name">{profile.name}</h2>
+        <p className="profile-email">{profile.email}</p>
+        <p className="profile-phone">{profile.phone}</p>
+      </div>
+      <div className="profile-footer">
+        <button className="profile-button">Edit Profile</button>
+        <button className="profile-button logout-button">Log Out</button>
+      </div>
     </div>
   );
 }

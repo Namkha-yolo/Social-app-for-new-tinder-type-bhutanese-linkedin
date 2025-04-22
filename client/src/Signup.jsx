@@ -1,11 +1,13 @@
 // src/Signup.jsx
 import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom'; // Import both useNavigate and Link
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import './Signup.css'; // Import the CSS file for styling
 
 function Signup() {
   const [form, setForm] = useState({ name: '', email: '', phone: '', password: '' });
   const [message, setMessage] = useState('');
-  const navigate = useNavigate(); // For redirection
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -24,11 +26,8 @@ function Signup() {
       const data = await res.json();
 
       if (res.ok) {
-        setMessage('✅ Signup successful! Redirecting to Login...');
-        setTimeout(() => {
-          navigate('/'); // Redirect to the Login page after 2 seconds
-        }, 2000);
-        setForm({ name: '', email: '', phone: '', password: '' });
+        setMessage('✅ Signup successful! Redirecting...');
+        setTimeout(() => navigate('/login'), 2000); // Redirect to login page after 2 seconds
       } else {
         setMessage(`❌ ${data.error}`);
       }
@@ -38,39 +37,39 @@ function Signup() {
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: 'auto', padding: '2rem' }}>
-      <h2>Signup</h2>
-      <form onSubmit={handleSubmit}>
+    <div className="auth-container">
+      <h1 className="auth-title">Create an Account</h1>
+      <form className="auth-form" onSubmit={handleSubmit}>
         <input
+          className="auth-input"
           name="name"
           placeholder="Name"
-          value={form.name}
           onChange={handleChange}
-        /><br />
+        />
         <input
+          className="auth-input"
           name="email"
           placeholder="Email"
-          value={form.email}
           onChange={handleChange}
-        /><br />
+        />
         <input
+          className="auth-input"
           name="phone"
           placeholder="Phone"
-          value={form.phone}
           onChange={handleChange}
-        /><br />
+        />
         <input
+          className="auth-input"
           name="password"
           placeholder="Password"
           type="password"
-          value={form.password}
           onChange={handleChange}
-        /><br />
-        <button type="submit">Sign Up</button>
+        />
+        <button className="auth-button" type="submit">Sign Up</button>
       </form>
-      <p>{message}</p>
-      <p>
-        Already have an account? <Link to="/">Return to Login</Link>
+      <p className="auth-message">{message}</p>
+      <p className="auth-footer">
+        Already have an account? <Link to="/login">Log in here</Link>
       </p>
     </div>
   );
