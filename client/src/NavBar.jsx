@@ -1,5 +1,7 @@
 // src/NavBar.jsx
+import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import './Navbar.css';
 
 function NavBar() {
   const navigate = useNavigate();
@@ -10,37 +12,16 @@ function NavBar() {
   };
 
   return (
-    <nav style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        background: '#f8f8f8',
-        padding: '10px 20px',
-        borderBottom: '1px solid #ccc',
-        marginBottom: '20px'
-      }}>
-      <div>
-        <Link to="/feed" style={{ marginRight: '20px', textDecoration: 'none', color: '#333' }}>
-          Feed
-        </Link>
-        <Link to="/upload" style={{ marginRight: '20px', textDecoration: 'none', color: '#333' }}>
-          Upload
-        </Link>
-        <Link to="/profile" style={{ marginRight: '20px', textDecoration: 'none', color: '#333' }}>
-          Profile
-        </Link>
-        <Link to="/chat" style={{ marginRight: '20px', textDecoration: 'none', color: '#333' }}>
-          Messages
-        </Link>
-        <Link to="/search" style={{ marginRight: '20px', textDecoration: 'none', color: '#333' }}>
-          Search
-        </Link>
-      </div>
-      <div>
-        <button onClick={handleLogout} style={{ padding: '5px 10px', fontSize: '16px' }}>
-          Logout
-        </button>
-      </div>
+    <nav className="navbar">
+      <h1 className="navbar-title">JOB BOARD</h1>
+      <ul className="navbar-links">
+        <li><Link to="/feed">Feed</Link></li>
+        <li><Link to="/upload">Upload</Link></li>
+        <li><Link to="/profile">Profile</Link></li>
+        <li><Link to="/chat">Messages</Link></li>
+        <li><Link to="/search">Search</Link></li>
+        <li><button onClick={handleLogout}>Logout</button></li>
+      </ul>
     </nav>
   );
 }

@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // To navigate to the Chat page
 import { Link } from 'react-router-dom'; // For linking to the Signup page
+import './Login.css';
 
 function Login() {
   const [form, setForm] = useState({ email: '', phone: '', password: '' });
@@ -47,32 +48,32 @@ function Login() {
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: 'auto', padding: '2rem' }}>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
+    <div className="auth-container">
+      <h1 className="auth-title">Welcome Back</h1>
+      <form className="auth-form" onSubmit={handleSubmit}>
         <input
+          className="auth-input"
           name="email"
           placeholder="Email"
           onChange={handleChange}
         />
-        <br />
         <input
+          className="auth-input"
           name="phone"
           placeholder="Phone"
           onChange={handleChange}
         />
-        <br />
         <input
+          className="auth-input"
           name="password"
           placeholder="Password"
           type="password"
           onChange={handleChange}
         />
-        <br />
-        <button type="submit">Log In</button>
+        <button className="auth-button" type="submit">Log In</button>
       </form>
-      <p>{message}</p>
-      <p>
+      <p className="auth-message">{message}</p>
+      <p className="auth-footer">
         Don't have an account? <Link to="/signup">Sign up here</Link>
       </p>
     </div>
